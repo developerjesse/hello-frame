@@ -26,6 +26,7 @@ import { BaseError, UserRejectedRequestError } from "viem";
 import { useSession } from "next-auth/react";
 import { Label } from "~/components/ui/label";
 import { useFrame } from "~/components/providers/FrameProvider";
+import Image from "next/image";
 
 export default function Demo(
   { title }: { title?: string } = { title: "Frames v2 Demo" }
@@ -181,6 +182,19 @@ export default function Demo(
     >
       <div className="w-[300px] mx-auto py-2 px-2">
         <h1 className="text-2xl font-bold text-center mb-4">{title}</h1>
+
+        {context && (
+          <div className="text-2xl text-center mb-4">
+            <Image
+              src={context.user.pfpUrl as string}
+              width="80"
+              height="80"
+              className="mx-auto mb-3"
+              alt={context.user.displayName as string}
+            />
+            Hello {context.user.displayName}
+          </div>
+        )}
 
         <div className="mb-4">
           <h2 className="font-2xl font-bold">Context</h2>
@@ -576,7 +590,7 @@ function SignIn() {
 }
 
 function ViewProfile() {
-  const [fid, setFid] = useState("3");
+  const [fid, setFid] = useState("882987");
 
   return (
     <>
